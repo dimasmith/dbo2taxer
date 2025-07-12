@@ -6,6 +6,7 @@ description = "Simple cli to prepare taxer data from DBO statements"
 license-file = "LICENSE"
 
 [dependencies]
+anyhow = "1.0.98"
 clap = { version = "4.5.41", features = ["derive"] }
 dbo_csv = { git = "https://github.com/dimasmith/dbo_csv" }
 taxer_csv = { git = "https://github.com/dimasmith/taxer_csv" }
