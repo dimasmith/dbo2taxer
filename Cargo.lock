@@ -194,7 +194,7 @@ dependencies = [
 [[package]]
 name = "dbo_csv"
 version = "0.1.0-alpha.0"
-source = "git+https://github.com/dimasmith/dbo_csv#99af5d4f2ceaaf57f354847415ceb5ceace3c72e"
+source = "git+https://github.com/dimasmith/dbo_csv#2689faab3b5be2a582ffb89d3aff2d77850a7531"
 dependencies = [
  "chrono",
  "csv",

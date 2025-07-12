@@ -12,17 +12,21 @@ fn main() {
 }
 
 fn convert_records(statement: DboStatement) -> Vec<TaxerRecord> {
-    statement.iter().map(convert_record).collect()
+    statement
+        .into_inner()
+        .into_iter()
+        .map(convert_record)
+        .collect()
 }
 
-fn convert_record(record: &DboRecord) -> TaxerRecord {
+fn convert_record(record: DboRecord) -> TaxerRecord {
     TaxerRecord::builder()
-        .tax_code_raw(record.party_tax_id.clone())
+        .tax_code_raw(record.party_tax_id)
         .unwrap()
         .amount_raw(record.coverage)
         .unwrap()
         .date(record.operation_date)
-        .comment(record.payment_purpose.clone())
+        .comment(record.payment_purpose)
         .build()
         .unwrap()
 }
