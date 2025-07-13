@@ -8,5 +8,7 @@ license-file = "LICENSE"
 [dependencies]
 anyhow = "1.0.98"
 clap = { version = "4.5.41", features = ["derive"] }
+config = "0.15.13"
 dbo_csv = { git = "https://github.com/dimasmith/dbo_csv" }
+serde = { version = "1.0.219", features = ["derive"] }
 taxer_csv = { git = "https://github.com/dimasmith/taxer_csv" }
