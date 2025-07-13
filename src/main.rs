@@ -44,23 +44,30 @@ fn convert_records(
 ) -> anyhow::Result<Vec<TaxerRecord>> {
     let mut taxer_operations = vec![];
     for dbo in statement.into_inner() {
-        if dbo.credit.is_some() {
-            taxer_operations.push(convert_record(dbo, config)?);
+        if let Some(record) = convert_record(dbo, config)? {
+            taxer_operations.push(record);
         }
     }
     Ok(taxer_operations)
 }
 
-fn convert_record(record: DboRecord, config: &TaxerConfig) -> anyhow::Result<TaxerRecord> {
-    TaxerRecord::builder()
-        .tax_code_raw(record.party_tax_id)?
-        .amount_raw(record.credit.unwrap())?
-        .date(record.operation_date)
-        .comment(record.payment_purpose)
-        .operation(config.operation.clone())
-        .income_type(config.income_type.clone())
-        .account_name(config.account_name.clone())
-        .currency_code(record.currency.clone())
-        .build()
-        .map_err(|err| anyhow::anyhow!(err))
+fn convert_record(record: DboRecord, config: &TaxerConfig) -> anyhow::Result<Option<TaxerRecord>> {
+    let record = match record.credit {
+        Some(amount) => {
+            let record = TaxerRecord::builder()
+                .tax_code_raw(record.party_tax_id)?
+                .amount_raw(amount)?
+                .date(record.operation_date)
+                .comment(record.payment_purpose)
+                .operation(config.operation.clone())
+                .income_type(config.income_type.clone())
+                .account_name(config.account_name.clone())
+                .currency_code(record.currency.clone())
+                .build()
+                .map_err(|err| anyhow::anyhow!(err))?;
+            Some(record)
+        }
+        None => None,
+    };
+    Ok(record)
 }
