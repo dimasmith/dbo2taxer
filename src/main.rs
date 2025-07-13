@@ -1,11 +1,9 @@
-use std::{
-    fs::File,
-    io::{stdin, stdout},
-};
+use std::fs::File;
+use std::io::{stdin, stdout};
 
 use clap::Parser;
 use dbo_csv::{DboRecord, DboStatement, deserialize_statement};
-use dbo2taxer::TaxerConfig;
+use dbo2taxer::config::TaxerConfig;
 use taxer_csv::{TaxerRecord, serialize_taxer};
 
 use crate::cli::Cli;
