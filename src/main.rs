@@ -1,16 +1,37 @@
-use std::io::{stdin, stdout};
+use std::{
+    fs::File,
+    io::{stdin, stdout},
+};
 
+use clap::Parser;
 use dbo_csv::{DboRecord, DboStatement, deserialize_statement};
 use dbo2taxer::TaxerConfig;
 use taxer_csv::{TaxerRecord, serialize_taxer};
 
+use crate::cli::Cli;
+
+mod cli;
+
 fn main() -> anyhow::Result<()> {
+    let cli = Cli::parse();
     let taxer_config = TaxerConfig::from_configuration()?;
-    let statement_input = stdin();
-    let statement = deserialize_statement(statement_input)?;
-    let taxer_out = stdout();
+
+    let statement = match cli.input {
+        Some(input_path) => {
+            let input_file = File::open(input_path)?;
+            deserialize_statement(input_file)?
+        }
+        None => deserialize_statement(stdin())?,
+    };
+
     let records = convert_records(statement, &taxer_config)?;
-    serialize_taxer(taxer_out, &records)?;
+    match cli.output {
+        Some(output_path) => {
+            let output_file = File::create(output_path)?;
+            serialize_taxer(output_file, &records)?;
+        }
+        None => serialize_taxer(stdout(), &records)?,
+    };
     Ok(())
 }
 

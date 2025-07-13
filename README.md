@@ -34,3 +34,13 @@ The list of environment variables and default values.
 | DBO2TAXER_OPERATION     | "Дохід"          | Type of operation                  |
 | DBO2TAXER_INCOME_TYPE   | "Основний дохід" | The type of income for taxation    |
 | DBO2TAXER_CURRENCY_CODE | "UAH"            | Income currency                    |
+
+### Specify input and output files
+
+The command supports `-i` and `-o` parameters to specify input and output files respectively.
+
+```bash
+dbo2csv -i dbo-statement.csv -o taxer-operations.csv
+```
+
+With that you can omit tinkering with stream redirection.
