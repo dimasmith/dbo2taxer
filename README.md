@@ -46,6 +46,8 @@ income_type = "Main income"
 
 You can also use equivalent `yaml` or `json` file.
 
+You can specify a custom configuration file using the `-c` option. Note that a default configuration is not used when you specify a custom configuration file.
+
 ### Specify input and output files
 
 The command supports `-i` and `-o` parameters to specify input and output files respectively.
