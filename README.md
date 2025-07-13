@@ -28,12 +28,11 @@ cat dbo-statement.csv | DBO2TAXER_ACCOUNT_NAME="ФОП" dbo2taxer
 
 The list of environment variables and default values.
 
-| Variable                | Default value    | Meaning                            |
-| ----------------------- | ---------------- | ---------------------------------- |
-| DBO2TAXER_ACCOUNT_NAME  | ""               | Name of account in the income list |
-| DBO2TAXER_OPERATION     | "Дохід"          | Type of operation                  |
-| DBO2TAXER_INCOME_TYPE   | "Основний дохід" | The type of income for taxation    |
-| DBO2TAXER_CURRENCY_CODE | "UAH"            | Income currency                    |
+| Variable               | Default value    | Meaning                            |
+| ---------------------- | ---------------- | ---------------------------------- |
+| DBO2TAXER_ACCOUNT_NAME | ""               | Name of account in the income list |
+| DBO2TAXER_OPERATION    | "Дохід"          | Type of operation                  |
+| DBO2TAXER_INCOME_TYPE  | "Основний дохід" | The type of income for taxation    |
 
 ### Specify input and output files
 
