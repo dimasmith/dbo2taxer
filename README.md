@@ -34,7 +34,7 @@ The list of environment variables and default values.
 | DBO2TAXER_OPERATION    | "Дохід"          | Type of operation                  |
 | DBO2TAXER_INCOME_TYPE  | "Основний дохід" | The type of income for taxation    |
 
-### Place additional values into a configuration files
+### Store additional values in configuration files
 
 Additional taxer values rarely change. It's often convenient to place them into a default configuration file. The file is in `~/.config/dbo2taxer.toml`.
 
