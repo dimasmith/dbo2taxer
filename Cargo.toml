@@ -10,7 +10,7 @@ anyhow = "1.0.98"
 chrono = "0.4.41"
 clap = { version = "4.5.41", features = ["derive"] }
 config = "0.15.13"
-dbo_csv = { git = "https://github.com/dimasmith/dbo_csv" }
+dbo_csv = { git = "https://github.com/dimasmith/dbo_csv", tag = "0.1.0" }
 directories = "6.0.0"
 serde = { version = "1.0.219", features = ["derive"] }
-taxer_csv = { git = "https://github.com/dimasmith/taxer_csv" }
+taxer_csv = { git = "https://github.com/dimasmith/taxer_csv", tag = "0.1.0" }
