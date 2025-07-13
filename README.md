@@ -44,3 +44,17 @@ dbo2csv -i dbo-statement.csv -o taxer-operations.csv
 ```
 
 With that you can omit tinkering with stream redirection.
+
+### Filter by years and quarters
+
+You may use `-q` and `-y` options to include only records of a given quarter and/or year.
+
+Examples:
+
+| Parameters    | Meaning                        |
+| ------------- | ------------------------------ |
+| -q q1         | Only records of Q1 of any year |
+| -q q1 -y 2025 | Only records of Q1 of 2025     |
+| -y 2025       | All records of 2025            |
+
+The tool processes all records if you don't specify any filtering.

@@ -4,6 +4,7 @@ use std::io::{stdin, stdout};
 use clap::Parser;
 use dbo_csv::{DboRecord, DboStatement, deserialize_statement};
 use dbo2taxer::config::TaxerConfig;
+use dbo2taxer::filter::DateFilter;
 use taxer_csv::{TaxerRecord, serialize_taxer};
 
 use crate::cli::Cli;
@@ -13,6 +14,7 @@ mod cli;
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
     let taxer_config = TaxerConfig::from_configuration()?;
+    let filter = DateFilter::new(cli.quarter, cli.year);
 
     let statement = match cli.input {
         Some(input_path) => {
@@ -22,7 +24,10 @@ fn main() -> anyhow::Result<()> {
         None => deserialize_statement(stdin())?,
     };
 
-    let records = convert_records(statement, &taxer_config)?;
+    let records = convert_records(statement, &taxer_config)?
+        .into_iter()
+        .filter(|r| filter.matches(r.date))
+        .collect::<Vec<_>>();
     match cli.output {
         Some(output_path) => {
             let output_file = File::create(output_path)?;
