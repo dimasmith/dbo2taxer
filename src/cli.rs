@@ -21,4 +21,8 @@ pub struct Cli {
     /// Include only payments occured in a specified year.
     #[arg(short, long)]
     pub year: Option<i32>,
+
+    /// Path to configuration file. If used, it completely overrides the default config file.
+    #[arg(short, long)]
+    pub config: Option<PathBuf>,
 }

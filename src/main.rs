@@ -13,7 +13,7 @@ mod cli;
 
 fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
-    let taxer_config = TaxerConfig::from_configuration()?;
+    let taxer_config = TaxerConfig::from_configuration(cli.config)?;
     let filter = DateFilter::new(cli.quarter, cli.year);
 
     let statement = match cli.input {
