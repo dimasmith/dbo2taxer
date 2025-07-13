@@ -31,20 +31,16 @@ impl TaxerConfig {
             .set_default("operation", default_config.operation)?
             .set_default("income_type", default_config.income_type)?;
 
-        match custom_config {
-            Some(custom_conf) => {
-                config_builder = config_builder.add_source(
-                    config::File::with_name(custom_conf.to_str().unwrap()).required(true),
-                );
+        if let Some(custom_config_path) = custom_config {
+            if let Some(custom_config_file) = custom_config_path.to_str() {
+                config_builder = config_builder
+                    .add_source(config::File::with_name(custom_config_file).required(true));
             }
-            None => {
-                if let Some(project_dirs) = ProjectDirs::from("", "", "dbo2taxer") {
-                    let config_dir = project_dirs.config_dir();
-                    if let Some(dir_name) = config_dir.to_str() {
-                        config_builder = config_builder
-                            .add_source(config::File::with_name(dir_name).required(false));
-                    }
-                }
+        } else if let Some(project_dirs) = ProjectDirs::from("", "", "dbo2taxer") {
+            let default_config_path = project_dirs.config_dir();
+            if let Some(dir_name) = default_config_path.to_str() {
+                config_builder =
+                    config_builder.add_source(config::File::with_name(dir_name).required(false));
             }
         }
 
